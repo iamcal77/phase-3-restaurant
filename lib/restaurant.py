@@ -9,20 +9,21 @@ class Restaurant:
     def name(self):
         return self._name
 
-    def add_review(self, review):
-        self._reviews.append(review)
-
     def reviews(self):
         return self._reviews
 
     def customers(self):
         return list(set([review.customer() for review in self._reviews]))
 
+    def add_review(self, review):
+        self._reviews.append(review)
+
     def average_star_rating(self):
-        if len(self._reviews) == 0:
-            return 0
-        total_rating = sum([review.rating() for review in self._reviews])
-        return total_rating / len(self._reviews)
+        total_ratings = sum([review.rating() for review in self._reviews])
+        num_reviews = len(self._reviews)
+        if num_reviews > 0:
+            return total_ratings / num_reviews
+        return 0
 
     @classmethod
     def all(cls):
